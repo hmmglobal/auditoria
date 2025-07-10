@@ -1,0 +1,68 @@
+name: Validate PowerShell Scripts
+
+on:
+  push:
+    paths:
+      - 'scripts/**/*.ps1'
+  pull_request:
+    paths:
+      - 'scripts/**/*.ps1'
+
+jobs:
+  validate-scripts:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup PowerShell
+      uses: actions/setup-powershell@v1
+      with:
+        powershell-version: '7.0'
+        
+    - name: Install PSScriptAnalyzer
+      run: |
+        Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+        
+    - name: Validate PowerShell Scripts
+      run: |
+        $scripts = Get-ChildItem -Path "scripts" -Filter "*.ps1" -Recurse
+        $results = @()
+        
+        foreach ($script in $scripts) {
+          Write-Host "Validating: $($script.FullName)"
+          $analysis = Invoke-ScriptAnalyzer -Path $script.FullName
+          
+          if ($analysis) {
+            Write-Host "Issues found in $($script.Name):"
+            $analysis | ForEach-Object {
+              Write-Host "  - $($_.RuleName): $($_.Message)"
+            }
+            $results += $analysis
+          } else {
+            Write-Host "No issues found in $($script.Name)"
+          }
+        }
+        
+        if ($results.Count -gt 0) {
+          Write-Host "Total issues found: $($results.Count)"
+          exit 1
+        } else {
+          Write-Host "All scripts passed validation!"
+        }
+        
+    - name: Test Script Syntax
+      run: |
+        $scripts = Get-ChildItem -Path "scripts" -Filter "*.ps1" -Recurse
+        
+        foreach ($script in $scripts) {
+          Write-Host "Testing syntax: $($script.Name)"
+          try {
+            $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content $script.FullName -Raw), [ref]$null)
+            Write-Host "✓ Syntax OK: $($script.Name)"
+          } catch {
+            Write-Host "✗ Syntax Error in $($script.Name): $($_.Exception.Message)"
+            exit 1
+          }
+        } 

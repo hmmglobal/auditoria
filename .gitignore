@@ -1,0 +1,72 @@
+# Archivos de sistema
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.bak
+
+# Archivos de PowerShell
+*.ps1.log
+*.ps1.tmp
+
+# Directorios de evidencias (contienen información sensible)
+evidencias/
+capturas-pantalla/
+logs/
+reportes/
+
+# Archivos de configuración específicos
+config.json
+settings.ini
+*.config
+
+# Archivos de backup
+*.backup
+*.old
+
+# Archivos de compresión
+*.zip
+*.rar
+*.7z
+
+# Archivos de documentación oficial CN-CERT (copyright)
+CCN-STIC*.pdf
+Scripts-599AB23/
+*.xml
+
+# Archivos de auditoría específicos
+audit-*.txt
+reporte-*.txt
+evidencias-*.zip
+
+# Archivos de usuario
+usuario-*.txt
+personal-*.txt
+
+# Archivos de prueba
+test-*.txt
+prueba-*.txt
+
+# Directorios de trabajo
+work/
+temp/
+tmp/
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de Windows
+*.lnk
+*.url
+
+# Archivos de Office temporales
+~$*.docx
+~$*.xlsx
+~$*.pptx 
