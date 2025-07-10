@@ -29,16 +29,16 @@ if (-not (Test-Path $InstallPath)) {
 }
 
 # Configurar PowerShell
-Write-Host "🔧 Configurando PowerShell..." -ForegroundColor Cyan
+Write-Host "Configurando PowerShell..." -ForegroundColor Cyan
 try {
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-    Write-Host "✅ Política de ejecución configurada" -ForegroundColor Green
+    Write-Host "Politica de ejecucion configurada" -ForegroundColor Green
 } catch {
-    Write-Host "⚠️  No se pudo configurar la política de ejecución" -ForegroundColor Yellow
+    Write-Host "No se pudo configurar la politica de ejecucion" -ForegroundColor Yellow
 }
 
 # Verificar requisitos
-Write-Host "🔍 Verificando requisitos del sistema..." -ForegroundColor Cyan
+Write-Host "Verificando requisitos del sistema..." -ForegroundColor Cyan
 
 # Verificar PowerShell
 $psVersion = $PSVersionTable.PSVersion
@@ -50,15 +50,15 @@ Write-Host "   Sistema Operativo: $($osInfo.WindowsProductName) $($osInfo.Window
 
 # Verificar permisos
 if ($isAdmin) {
-    Write-Host "   Permisos: Administrador ✅" -ForegroundColor Green
+    Write-Host "   Permisos: Administrador" -ForegroundColor Green
 } else {
-    Write-Host "   Permisos: Usuario estándar ⚠️" -ForegroundColor Yellow
+    Write-Host "   Permisos: Usuario estandar" -ForegroundColor Yellow
 }
 
 Write-Host ""
 
 # Crear estructura de directorios
-Write-Host "📂 Creando estructura de directorios..." -ForegroundColor Cyan
+Write-Host "Creando estructura de directorios..." -ForegroundColor Cyan
 $directories = @(
     "evidencias",
     "evidencias\capturas-pantalla",
@@ -71,16 +71,16 @@ foreach ($dir in $directories) {
     $fullPath = Join-Path $InstallPath $dir
     if (-not (Test-Path $fullPath)) {
         New-Item -ItemType Directory -Path $fullPath -Force | Out-Null
-        Write-Host "   ✅ $dir" -ForegroundColor Green
+        Write-Host "   $dir" -ForegroundColor Green
     } else {
-        Write-Host "   ✅ $dir (ya existe)" -ForegroundColor Green
+        Write-Host "   $dir (ya existe)" -ForegroundColor Green
     }
 }
 
 Write-Host ""
 
 # Crear archivo de configuración
-Write-Host "⚙️  Creando archivo de configuración..." -ForegroundColor Cyan
+Write-Host "Creando archivo de configuracion..." -ForegroundColor Cyan
 $configContent = @"
 # Configuración CN-CERT Bastionado
 # Fecha de instalación: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
@@ -106,12 +106,12 @@ Get-LinuxSecurityEvidence = "scripts\Get-LinuxSecurityEvidence.sh"
 
 $configPath = Join-Path $InstallPath "config.ini"
 $configContent | Out-File -FilePath $configPath -Encoding UTF8
-Write-Host "✅ Archivo de configuración creado: $configPath" -ForegroundColor Green
+Write-Host "Archivo de configuracion creado: $configPath" -ForegroundColor Green
 
 Write-Host ""
 
 # Crear script de ejecución rápida
-Write-Host "🚀 Creando script de ejecución rápida..." -ForegroundColor Cyan
+Write-Host "Creando script de ejecucion rapida..." -ForegroundColor Cyan
 $quickRunContent = @"
 # Script de Ejecución Rápida - CN-CERT Bastionado
 # Ejecutar este script para iniciar una auditoría completa
@@ -132,7 +132,7 @@ param(
 `$ScriptsPath = Join-Path `$InstallPath "scripts"
 `$OutputPath = Join-Path `$InstallPath "evidencias"
 
-Write-Host "=== EJECUCIÓN RÁPIDA - CN-CERT BASTIONADO ===" -ForegroundColor Green
+Write-Host "=== EJECUCION RAPIDA - CN-CERT BASTIONADO ===" -ForegroundColor Green
 Write-Host "Sistema: `$SystemName" -ForegroundColor Yellow
 Write-Host "Auditor: `$AuditorName" -ForegroundColor Yellow
 Write-Host "Directorio de salida: `$OutputPath" -ForegroundColor Yellow
@@ -140,13 +140,13 @@ Write-Host ""
 
 # Verificar que los scripts existen
 if (-not (Test-Path (Join-Path `$ScriptsPath "Get-SecurityEvidence.ps1"))) {
-    Write-Host "❌ Error: Scripts no encontrados en `$ScriptsPath" -ForegroundColor Red
-    Write-Host "   Asegúrate de que los scripts estén en el directorio correcto." -ForegroundColor Red
+    Write-Host "Error: Scripts no encontrados en `$ScriptsPath" -ForegroundColor Red
+Write-Host "   Asegurate de que los scripts esten en el directorio correcto." -ForegroundColor Red
     exit 1
 }
 
 # Ejecutar script principal
-Write-Host "🔍 Iniciando recolección de evidencias..." -ForegroundColor Cyan
+Write-Host "Iniciando recoleccion de evidencias..." -ForegroundColor Cyan
 `$scriptPath = Join-Path `$ScriptsPath "Get-SecurityEvidence.ps1"
 
 `$params = @{
@@ -161,23 +161,23 @@ if (`$IncludeLogs) { `$params.IncludeLogs = `$true }
 try {
     & `$scriptPath @params
     Write-Host ""
-    Write-Host "✅ Auditoría completada exitosamente!" -ForegroundColor Green
-    Write-Host "📁 Evidencias disponibles en: `$OutputPath" -ForegroundColor Green
+    Write-Host "Auditoria completada exitosamente!" -ForegroundColor Green
+    Write-Host "Evidencias disponibles en: `$OutputPath" -ForegroundColor Green
 } catch {
-    Write-Host "❌ Error durante la ejecución: `$(`$_.Exception.Message)" -ForegroundColor Red
+    Write-Host "Error durante la ejecucion: `$(`$_.Exception.Message)" -ForegroundColor Red
 }
 "@
 
 $quickRunPath = Join-Path $InstallPath "ejecutar-auditoria.ps1"
 $quickRunContent | Out-File -FilePath $quickRunPath -Encoding UTF8
-Write-Host "✅ Script de ejecución rápida creado: $quickRunPath" -ForegroundColor Green
+Write-Host "Script de ejecucion rapida creado: $quickRunPath" -ForegroundColor Green
 
 Write-Host ""
 
 # Mostrar instrucciones de uso
 Write-Host "=== INSTRUCCIONES DE USO ===" -ForegroundColor Green
 Write-Host ""
-Write-Host "📁 Directorio de instalación: $InstallPath" -ForegroundColor White
+Write-Host "Directorio de instalacion: $InstallPath" -ForegroundColor White
 Write-Host ""
 Write-Host "Para ejecutar una auditoria:" -ForegroundColor Cyan
 Write-Host "   cd $InstallPath" -ForegroundColor White
@@ -193,17 +193,17 @@ Write-Host "   explorer ." -ForegroundColor White
 Write-Host ""
 
 # Verificar si Git está instalado
-Write-Host "🔍 Verificando Git..." -ForegroundColor Cyan
+Write-Host "Verificando Git..." -ForegroundColor Cyan
 try {
     $gitVersion = git --version
-    Write-Host "✅ Git instalado: $gitVersion" -ForegroundColor Green
+    Write-Host "Git instalado: $gitVersion" -ForegroundColor Green
 } catch {
-    Write-Host "⚠️  Git no encontrado. Para contribuir al proyecto, instala Git desde: https://git-scm.com/" -ForegroundColor Yellow
+    Write-Host "Git no encontrado. Para contribuir al proyecto, instala Git desde: https://git-scm.com/" -ForegroundColor Yellow
 }
 
 Write-Host ""
-Write-Host "=== INSTALACIÓN COMPLETADA ===" -ForegroundColor Green
-Write-Host "🎉 ¡Todo listo para usar las herramientas de CN-CERT Bastionado!" -ForegroundColor Green
+Write-Host "=== INSTALACION COMPLETADA ===" -ForegroundColor Green
+Write-Host "Todo listo para usar las herramientas de CN-CERT Bastionado!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Proximos pasos:" -ForegroundColor Cyan
 Write-Host "   1. Revisar la documentacion en README.md" -ForegroundColor White
