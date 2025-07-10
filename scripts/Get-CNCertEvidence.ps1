@@ -1,6 +1,6 @@
-# Script de Evidencias CN-CERT - Op.exp.2 Configuración de Seguridad
+# Script de Evidencias CN-CERT - Op.exp.2 Configuracion de Seguridad
 # Autor: Equipo de Seguridad
-# Versión: 1.0
+# Version: 1.0
 # Fecha: $(Get-Date -Format "yyyy-MM-dd")
 
 param(
@@ -21,7 +21,7 @@ param(
     [switch]$Verbose
 )
 
-# Configuración inicial
+# Configuracion inicial
 $ErrorActionPreference = "Continue"
 $ProgressPreference = "SilentlyContinue"
 
@@ -38,7 +38,7 @@ New-Item -ItemType Directory -Path $ScreenshotsPath -Force | Out-Null
 New-Item -ItemType Directory -Path $ReportsPath -Force | Out-Null
 New-Item -ItemType Directory -Path $LogsPath -Force | Out-Null
 
-Write-Host "=== EVIDENCIAS CN-CERT - Op.exp.2 Configuración de Seguridad ===" -ForegroundColor Green
+Write-Host "=== EVIDENCIAS CN-CERT - Op.exp.2 Configuracion de Seguridad ===" -ForegroundColor Green
 Write-Host "Sistema: $SystemName" -ForegroundColor Yellow
 Write-Host "Auditor: $AuditorName" -ForegroundColor Yellow
 Write-Host "Responsable: $ResponsableName" -ForegroundColor Yellow
@@ -114,13 +114,13 @@ $Result
 }
 
 # Inicio de la recolección
-Write-Log "Iniciando recolección de evidencias CN-CERT Op.exp.2"
+Write-Log "Iniciando recoleccion de evidencias CN-CERT Op.exp.2"
 
-# ASPECTO 1: Configuración de Seguridad Previa a Producción
-Write-Host "=== ASPECTO 1: Configuración de Seguridad Previa a Producción ===" -ForegroundColor Cyan
+# ASPECTO 1: Configuracion de Seguridad Previa a Produccion
+Write-Host "=== ASPECTO 1: Configuracion de Seguridad Previa a Produccion ===" -ForegroundColor Cyan
 
-Write-Host "1.1 Verificando políticas de grupo aplicadas..." -ForegroundColor Yellow
-Invoke-CommandAndSave -Command "gpresult /r" -FileName "politicas-grupo" -Description "POLÍTICAS DE GRUPO APLICADAS"
+Write-Host "1.1 Verificando politicas de grupo aplicadas..." -ForegroundColor Yellow
+Invoke-CommandAndSave -Command "gpresult /r" -FileName "politicas-grupo" -Description "POLITICAS DE GRUPO APLICADAS"
 
 Write-Host "1.2 Verificando configuraciones de seguridad..." -ForegroundColor Yellow
 Invoke-CommandAndSave -Command "Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'" -FileName "configuraciones-seguridad" -Description "CONFIGURACIONES DE SEGURIDAD"

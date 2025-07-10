@@ -111,14 +111,14 @@ $Result
 # Inicio de la recolección
 Write-Log "Iniciando recolección de evidencias de seguridad"
 
-# 1. Información del Sistema
-Write-Host "1. Recolectando información del sistema..." -ForegroundColor Cyan
-Invoke-CommandAndSave -Command "systeminfo" -FileName "informacion-sistema" -Description "INFORMACIÓN DEL SISTEMA"
-Invoke-CommandAndSave -Command "ipconfig /all" -FileName "configuracion-red" -Description "CONFIGURACIÓN DE RED"
-Invoke-CommandAndSave -Command "systeminfo | findstr /C:'Domain'" -FileName "informacion-dominio" -Description "INFORMACIÓN DE DOMINIO"
+# 1. Informacion del Sistema
+Write-Host "1. Recolectando informacion del sistema..." -ForegroundColor Cyan
+Invoke-CommandAndSave -Command "systeminfo" -FileName "informacion-sistema" -Description "INFORMACION DEL SISTEMA"
+Invoke-CommandAndSave -Command "ipconfig /all" -FileName "configuracion-red" -Description "CONFIGURACION DE RED"
+Invoke-CommandAndSave -Command "systeminfo | findstr /C:'Domain'" -FileName "informacion-dominio" -Description "INFORMACION DE DOMINIO"
 
-# 2. Configuración de Seguridad
-Write-Host "2. Recolectando configuración de seguridad..." -ForegroundColor Cyan
+# 2. Configuracion de Seguridad
+Write-Host "2. Recolectando configuracion de seguridad..." -ForegroundColor Cyan
 
 # Windows Defender
 Write-Log "Verificando Windows Defender"
@@ -174,21 +174,21 @@ $BitLockerStatus
 }
 
 # Firewall
-Invoke-CommandAndSave -Command "netsh advfirewall show allprofiles" -FileName "firewall" -Description "CONFIGURACIÓN DE FIREWALL"
+Invoke-CommandAndSave -Command "netsh advfirewall show allprofiles" -FileName "firewall" -Description "CONFIGURACION DE FIREWALL"
 
-# Políticas de Contraseñas
-Invoke-CommandAndSave -Command "net accounts" -FileName "politicas-contrasenas" -Description "POLÍTICAS DE CONTRASEÑAS"
+# Politicas de Contrasenas
+Invoke-CommandAndSave -Command "net accounts" -FileName "politicas-contrasenas" -Description "POLITICAS DE CONTRASENAS"
 
-# Políticas de Auditoría
-Invoke-CommandAndSave -Command "auditpol /get /category:*" -FileName "politicas-auditoria" -Description "POLÍTICAS DE AUDITORÍA"
+# Politicas de Auditoria
+Invoke-CommandAndSave -Command "auditpol /get /category:*" -FileName "politicas-auditoria" -Description "POLITICAS DE AUDITORIA"
 
 # 3. Usuarios y Grupos
-Write-Host "3. Recolectando información de usuarios..." -ForegroundColor Cyan
+Write-Host "3. Recolectando informacion de usuarios..." -ForegroundColor Cyan
 Invoke-CommandAndSave -Command "wmic useraccount get name,disabled,lockout" -FileName "usuarios-sistema" -Description "USUARIOS DEL SISTEMA"
 Invoke-CommandAndSave -Command "net localgroup administrators" -FileName "grupo-administradores" -Description "GRUPO DE ADMINISTRADORES"
 
 # 4. Servicios
-Write-Host "4. Verificando servicios críticos..." -ForegroundColor Cyan
+Write-Host "4. Verificando servicios criticos..." -ForegroundColor Cyan
 $Services = @("Windows Defender", "Windows Firewall", "Windows Update", "Telnet", "TFTP", "SNMP")
 foreach ($Service in $Services) {
     $ServiceStatus = sc query $Service 2>&1
@@ -218,8 +218,8 @@ $($Apps | Format-Table -AutoSize | Out-String)
 $AppsOutput | Out-File -FilePath (Join-Path $ReportsPath "aplicaciones-instaladas.txt") -Encoding UTF8
 Write-Log "Lista de aplicaciones guardada"
 
-# 6. Configuración de Office
-Write-Host "6. Verificando configuración de Office..." -ForegroundColor Cyan
+# 6. Configuracion de Office
+Write-Host "6. Verificando configuracion de Office..." -ForegroundColor Cyan
 $OfficeConfig = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Office" -ErrorAction SilentlyContinue
 if ($OfficeConfig) {
     $OfficeOutput = @"
@@ -237,8 +237,8 @@ $($OfficeConfig | Format-List | Out-String)
     Write-Log "Configuración de Office guardada"
 }
 
-# 7. Configuración de Proxy
-Invoke-CommandAndSave -Command "netsh winhttp show proxy" -FileName "configuracion-proxy" -Description "CONFIGURACIÓN DE PROXY"
+# 7. Configuracion de Proxy
+Invoke-CommandAndSave -Command "netsh winhttp show proxy" -FileName "configuracion-proxy" -Description "CONFIGURACION DE PROXY"
 
 # 8. Conexiones VPN
 $VpnConnections = Get-VpnConnection -ErrorAction SilentlyContinue
@@ -258,22 +258,22 @@ $($VpnConnections | Format-Table -AutoSize | Out-String)
     Write-Log "Conexiones VPN guardadas"
 }
 
-# 9. Últimas Actualizaciones
-Write-Host "9. Verificando últimas actualizaciones..." -ForegroundColor Cyan
+# 9. Ultimas Actualizaciones
+Write-Host "9. Verificando ultimas actualizaciones..." -ForegroundColor Cyan
 $HotFixes = Get-HotFix | Sort-Object -Property InstalledOn -Descending | Select-Object -First 10
 $HotFixesOutput = @"
-=== ÚLTIMAS ACTUALIZACIONES ===
+=== ULTIMAS ACTUALIZACIONES ===
 Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 Sistema: $SystemName
 Auditor: $AuditorName
 
-ACTUALIZACIONES (Últimas 10):
+ACTUALIZACIONES (Ultimas 10):
 $($HotFixes | Format-Table -AutoSize | Out-String)
 
-=== FIN DE ÚLTIMAS ACTUALIZACIONES ===
+=== FIN DE ULTIMAS ACTUALIZACIONES ===
 "@
 $HotFixesOutput | Out-File -FilePath (Join-Path $ReportsPath "ultimas-actualizaciones.txt") -Encoding UTF8
-Write-Log "Últimas actualizaciones guardadas"
+Write-Log "Ultimas actualizaciones guardadas"
 
 # 10. Capturas de Pantalla (si se solicita)
 if ($IncludeScreenshots) {
@@ -283,11 +283,11 @@ if ($IncludeScreenshots) {
     # Dar tiempo para abrir las ventanas necesarias
     Write-Host "Abra las siguientes ventanas para capturar:" -ForegroundColor Yellow
     Write-Host "- Windows Defender" -ForegroundColor Yellow
-    Write-Host "- Configuración de BitLocker" -ForegroundColor Yellow
+    Write-Host "- Configuracion de BitLocker" -ForegroundColor Yellow
     Write-Host "- Firewall de Windows" -ForegroundColor Yellow
     Write-Host "- Usuarios y Grupos" -ForegroundColor Yellow
     Write-Host "- Servicios" -ForegroundColor Yellow
-    Write-Host "Presione Enter cuando esté listo..." -ForegroundColor Yellow
+    Write-Host "Presione Enter cuando este listo..." -ForegroundColor Yellow
     Read-Host
     
     Capture-Screenshot -FileName "windows-defender"
