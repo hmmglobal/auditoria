@@ -1,0 +1,43 @@
+=== COMANDOS RAPIDOS - CN-CERT BASTIONADO ===
+
+=== COMANDO PRINCIPAL (COPIA Y PEGA ESTE) ===
+
+# Configurar PowerShell y ejecutar auditoria completa
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; cd scripts; .\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -IncludeScreenshots
+
+=== COMANDOS INDIVIDUALES ===
+
+# 1. Configurar PowerShell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
+# 2. Navegar a scripts
+cd scripts
+
+# 3. Ejecutar auditoria completa
+.\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -IncludeScreenshots
+
+# 4. Solo verificar (sin capturas)
+.\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre"
+
+# 5. Script CN-CERT especifico
+.\Get-CNCertEvidence.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre"
+
+=== COMANDOS DE VERIFICACION ===
+
+# Verificar evidencias
+dir C:\evidencias
+
+# Abrir carpeta
+explorer C:\evidencias
+
+=== COMANDOS DE SOLUCION DE PROBLEMAS ===
+
+# Si hay error de permisos
+Start-Process PowerShell -Verb RunAs
+
+# Si hay error de politica
+powershell -ExecutionPolicy Bypass -File "Get-SecurityEvidence-Clean.ps1" -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -IncludeScreenshots
+
+=== RECUERDA REEMPLAZAR ===
+- "Tu Nombre" = Tu nombre completo
+- "PC-001" = Nombre del sistema que auditas 

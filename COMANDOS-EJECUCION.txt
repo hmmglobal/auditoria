@@ -1,0 +1,89 @@
+=== COMANDOS PARA EJECUTAR EN PC DESTINO ===
+Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+
+INSTRUCCIONES:
+1. Abrir PowerShell como Administrador
+2. Copiar y pegar los comandos uno por uno
+3. Reemplazar "Tu Nombre" con tu nombre real
+4. Reemplazar "PC-001" con el nombre del sistema
+
+=== PASO 1: CONFIGURAR POWERSHELL ===
+
+# Permitir ejecucion de scripts
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
+=== PASO 2: NAVEGAR AL DIRECTORIO ===
+
+# Navegar al directorio donde descargaste los archivos
+cd "C:\ruta\donde\descargaste\cn-cert-bastionado"
+
+=== PASO 3: EJECUTAR INSTALACION ===
+
+# Ejecutar instalacion automatica
+.\install-simple.ps1
+
+=== PASO 4: COPIAR SCRIPTS ===
+
+# Crear directorio de scripts en la instalacion
+mkdir C:\cn-cert-bastionado\scripts -Force
+
+# Copiar scripts principales
+copy scripts\Get-SecurityEvidence-Clean.ps1 C:\cn-cert-bastionado\scripts\
+copy scripts\Get-CNCertEvidence.ps1 C:\cn-cert-bastionado\scripts\
+
+=== PASO 5: EJECUTAR AUDITORIA ===
+
+# Opcion A: Ejecutar desde directorio de instalacion
+cd C:\cn-cert-bastionado\scripts
+.\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\cn-cert-bastionado\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -IncludeScreenshots
+
+# Opcion B: Ejecutar desde directorio original
+cd scripts
+.\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -IncludeScreenshots
+
+=== COMANDOS ALTERNATIVOS ===
+
+# Solo verificar sin capturas de pantalla
+.\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre"
+
+# Con logs adicionales
+.\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -IncludeScreenshots -IncludeLogs
+
+# Script especifico CN-CERT
+.\Get-CNCertEvidence.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre"
+
+=== VERIFICACION ===
+
+# Verificar que las evidencias se generaron
+dir C:\evidencias
+dir C:\evidencias\reportes
+dir C:\evidencias\capturas-pantalla
+
+# Abrir carpeta de evidencias
+explorer C:\evidencias
+
+=== SOLUCION DE PROBLEMAS ===
+
+# Si hay error de permisos
+Start-Process PowerShell -Verb RunAs
+
+# Si hay error de politica de ejecucion
+powershell -ExecutionPolicy Bypass -File "Get-SecurityEvidence-Clean.ps1" -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -IncludeScreenshots
+
+# Verificar version de PowerShell
+$PSVersionTable.PSVersion
+
+=== INFORMACION IMPORTANTE ===
+
+- Reemplaza "Tu Nombre" con tu nombre completo
+- Reemplaza "PC-001" con el nombre del sistema que estas auditando
+- Las evidencias se guardaran en C:\evidencias\
+- El script generara capturas de pantalla automaticamente
+- Se creara un archivo ZIP con todas las evidencias
+
+=== EJEMPLO COMPLETO ===
+
+# Comando completo de ejemplo
+.\Get-SecurityEvidence-Clean.ps1 -OutputPath "C:\evidencias" -SystemName "LAPTOP-JUAN-001" -AuditorName "Juan Perez Gonzalez" -IncludeScreenshots
+
+=== FIN DE COMANDOS === 
