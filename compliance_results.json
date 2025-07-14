@@ -1,0 +1,180 @@
+﻿{
+    "ConfiguraciÃ³n de AuditorÃ­a":  {
+                                         "Expected":  {
+                                                          "Policy Change":  "Success and Failure",
+                                                          "Logon Events":  "Success and Failure",
+                                                          "Object Access":  "Success and Failure",
+                                                          "Process Tracking":  "No Auditing",
+                                                          "System Events":  "Success and Failure",
+                                                          "Account Logon Events":  "Success and Failure",
+                                                          "Account Management":  "Success and Failure",
+                                                          "Privilege Use":  "Success and Failure",
+                                                          "Directory Service Access":  "Success and Failure"
+                                                      },
+                                         "Compliance":  {
+                                                            "Logon Events":  false,
+                                                            "Object Access":  false,
+                                                            "Process Tracking":  false,
+                                                            "System Events":  false,
+                                                            "Account Logon Events":  false,
+                                                            "Account Management":  false,
+                                                            "Privilege Use":  false,
+                                                            "Policy Change":  false,
+                                                            "Directory Service Access":  false
+                                                        },
+                                         "Results":  {
+
+                                                     },
+                                         "Compliant":  false
+                                     },
+    "ConfiguraciÃ³n de Registro":  {
+                                       "Compliant":  false,
+                                       "Compliance":  {
+                                                          "LSA\\ForceGuest":  false,
+                                                          "LSA\\RestrictAnonymous":  false,
+                                                          "LSA\\DisableDomainCreds":  false,
+                                                          "LSA\\LimitBlankPasswordUse":  false,
+                                                          "LSA\\EveryoneIncludesAnonymous":  false,
+                                                          "LSA\\NoLMHash":  false,
+                                                          "LSA\\CrashOnAuditFail":  false
+                                                      },
+                                       "Results":  {
+                                                       "LSA\\ForceGuest":  "Not Found",
+                                                       "LSA\\RestrictAnonymous":  "Not Found",
+                                                       "LSA\\DisableDomainCreds":  "Not Found",
+                                                       "LSA\\LimitBlankPasswordUse":  "Not Found",
+                                                       "LSA\\EveryoneIncludesAnonymous":  "Not Found",
+                                                       "LSA\\NoLMHash":  "Not Found",
+                                                       "LSA\\CrashOnAuditFail":  "Not Found"
+                                                   }
+                                   },
+    "ConfiguraciÃ³n de Servicios":  {
+                                        "Compliant":  false,
+                                        "Results":  {
+                                                        "NonCompliantServices":  [
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  2,
+                                                                                         "Service":  "BluetoothUserService"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "CaptureService"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  2,
+                                                                                         "Service":  "cbdhsvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  2,
+                                                                                         "Service":  "CDPUserSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "ConsentUxUserSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "DevicePickerUserSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "DevicesFlowUserSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  2,
+                                                                                         "Service":  "OneSyncSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "PimIndexMaintenanceSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "PrintWorkflowUserSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "UnistoreSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  3,
+                                                                                         "Service":  "UserDataSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Disabled",
+                                                                                         "Actual":  2,
+                                                                                         "Service":  "WpnUserService"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Manual",
+                                                                                         "Actual":  4,
+                                                                                         "Service":  "AarSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Manual",
+                                                                                         "Actual":  4,
+                                                                                         "Service":  "NPSMSvc"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Manual",
+                                                                                         "Actual":  4,
+                                                                                         "Service":  "P9RdrService"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Manual",
+                                                                                         "Actual":  4,
+                                                                                         "Service":  "PenService"
+                                                                                     },
+                                                                                     {
+                                                                                         "Expected":  "Manual",
+                                                                                         "Actual":  2,
+                                                                                         "Service":  "webthreatdefusersvc"
+                                                                                     }
+                                                                                 ],
+                                                        "DisabledServices":  [
+                                                                                 "BcastDVRUserService",
+                                                                                 "MessagingService"
+                                                                             ],
+                                                        "ManualServices":  [
+                                                                               "CredentialEnrollmentManagerUserSvc",
+                                                                               "DeviceAssociationBrokerSvc",
+                                                                               "UdkUserSvc"
+                                                                           ]
+                                                    }
+                                    },
+    "PolÃ­ticas de ContraseÃ±as":  {
+                                       "Compliant":  true,
+                                       "Compliance":  {
+                                                          "PasswordComplexity":  true,
+                                                          "MaximumPasswordAge":  true,
+                                                          "MinimumPasswordLength":  true,
+                                                          "ResetLockoutCount":  true,
+                                                          "LockoutBadCount":  true,
+                                                          "PasswordHistorySize":  true,
+                                                          "MinimumPasswordAge":  true,
+                                                          "LockoutDuration":  true
+                                                      },
+                                       "Results":  {
+                                                       "PasswordComplexity":  "1",
+                                                       "MaximumPasswordAge":  "60",
+                                                       "MinimumPasswordLength":  "10",
+                                                       "ResetLockoutCount":  "15",
+                                                       "LockoutBadCount":  "5",
+                                                       "PasswordHistorySize":  "24",
+                                                       "MinimumPasswordAge":  "2",
+                                                       "LockoutDuration":  "-1"
+                                                   }
+                                   }
+}
