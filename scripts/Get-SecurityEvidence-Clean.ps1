@@ -272,6 +272,93 @@ $($HotFixes | Format-Table -AutoSize | Out-String)
 $HotFixesOutput | Out-File -FilePath (Join-Path $ReportsPath "ultimas-actualizaciones.txt") -Encoding UTF8
 Write-Log "Ultimas actualizaciones guardadas"
 
+# 9.5. Auditoria de Dispositivos USB
+Write-Host "9.5. Verificando dispositivos USB..." -ForegroundColor Cyan
+Write-Log "Iniciando auditoria de dispositivos USB"
+
+# Habilitar registro de eventos USB
+try {
+    $eventosusb = Get-WinEvent -ListLog 'Microsoft-Windows-DriverFrameworks-UserMode/Operational' -ErrorAction SilentlyContinue
+    if ($eventosusb) {
+        $eventosusb.IsEnabled = $true
+        $eventosusb.SaveChanges()
+        Write-Log "Registro de eventos USB habilitado"
+    }
+} catch {
+    Write-Log "No se pudo habilitar registro de eventos USB: $($_.Exception.Message)" "WARNING"
+}
+
+# Detectar unidades USB
+$unidadesexternasusb = @()
+try {
+    $unidadesexternasusb = gwmi win32_diskdrive | Where-Object {$_.interfacetype -eq "USB"} | ForEach-Object {
+        gwmi -Query "ASSOCIATORS OF {Win32_DiskDrive.DeviceID=`"$($_.DeviceID.replace('\','\\'))`"} WHERE AssocClass = Win32_DiskDriveToDiskPartition" | ForEach-Object {
+            gwmi -Query "ASSOCIATORS OF {Win32_DiskPartition.DeviceID=`"$($_.DeviceID)`"} WHERE AssocClass = Win32_LogicalDiskToPartition" | ForEach-Object {$_.deviceid}
+        }
+    }
+} catch {
+    Write-Log "Error detectando unidades USB: $($_.Exception.Message)" "ERROR"
+}
+
+# Generar reporte de dispositivos USB
+$USBOutput = @"
+=== AUDITORIA DE DISPOSITIVOS USB ===
+Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Sistema: $SystemName
+Auditor: $AuditorName
+
+REGISTRO DE EVENTOS USB:
+- Habilitado: $(if ($eventosusb -and $eventosusb.IsEnabled) { "SI" } else { "NO" })
+
+UNIDADES USB DETECTADAS:
+$(if ($unidadesexternasusb) {
+    $unidadesexternasusb | ForEach-Object { "- Unidad: $_" }
+} else {
+    "- No se detectaron unidades USB"
+})
+
+DISPOSITIVOS USB CONECTADOS:
+$((Get-WmiObject Win32_USBHub | Select-Object Name, DeviceID, Status | Format-Table -AutoSize | Out-String))
+
+EVENTOS USB RECIENTES:
+$((Get-WinEvent -LogName 'Microsoft-Windows-DriverFrameworks-UserMode/Operational' -MaxEvents 10 | Select-Object TimeCreated, Id, Message | Format-Table -AutoSize | Out-String))
+
+=== FIN DE AUDITORIA DE DISPOSITIVOS USB ===
+"@
+
+$USBOutput | Out-File -FilePath (Join-Path $ReportsPath "auditoria-usb.txt") -Encoding UTF8
+Write-Log "Auditoria de dispositivos USB guardada"
+
+# Escanear unidades USB con Windows Defender (si existen)
+if ($unidadesexternasusb) {
+    Write-Host "Escaneando unidades USB con Windows Defender..." -ForegroundColor Yellow
+    foreach ($unidad in $unidadesexternasusb) {
+        $letra = $unidad + "\"
+        Write-Log "Iniciando escaneo de unidad $letra"
+        
+        try {
+            $scanResult = & 'C:\Program Files\Windows Defender\MpCmdRun.exe' -Scan -ScanType 3 -File $letra 2>&1
+            $scanOutput = @"
+=== ESCANEO WINDOWS DEFENDER - UNIDAD $letra ===
+Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+Sistema: $SystemName
+Auditor: $AuditorName
+
+RESULTADO:
+$scanResult
+
+=== FIN DE ESCANEO - UNIDAD $letra ===
+"@
+            $scanOutput | Out-File -FilePath (Join-Path $ReportsPath "escaneo-usb-$($unidad.Replace(':','')).txt") -Encoding UTF8
+            Write-Log "Escaneo completado para unidad $letra"
+        } catch {
+            Write-Log "Error escaneando unidad $letra : $($_.Exception.Message)" "ERROR"
+        }
+    }
+} else {
+    Write-Log "No se encontraron unidades USB para escanear"
+}
+
 # 10. Capturas de Pantalla (si se solicita)
 if ($IncludeScreenshots) {
     Write-Host "10. Capturando pantallas..." -ForegroundColor Cyan
@@ -343,7 +430,11 @@ EVIDENCIAS RECOLECTADAS:
 7. ACTUALIZACIONES:
    - Ultimas actualizaciones: $(if (Test-Path (Join-Path $ReportsPath "ultimas-actualizaciones.txt")) { "Verificado" } else { "No verificado" })
 
-8. CAPTURAS DE PANTALLA:
+8. DISPOSITIVOS USB:
+   - Auditoria USB: $(if (Test-Path (Join-Path $ReportsPath "auditoria-usb.txt")) { "Verificado" } else { "No verificado" })
+   - Escaneo USB: Verificado
+
+9. CAPTURAS DE PANTALLA:
    - Capturas de pantalla: $(if ($IncludeScreenshots) { "Incluidas" } else { "No incluidas" })
 
 === FIN DE RESUMEN EJECUTIVO ===

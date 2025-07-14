@@ -22,6 +22,9 @@ cd scripts
 # 5. Script CN-CERT especifico
 .\Get-CNCertEvidence.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre"
 
+# 6. Auditoria USB especifica
+.\Auditoria-USB.ps1 -OutputPath "C:\evidencias" -SystemName "PC-001" -AuditorName "Tu Nombre" -EscanearUSB
+
 === COMANDOS DE VERIFICACION ===
 
 # Verificar evidencias
