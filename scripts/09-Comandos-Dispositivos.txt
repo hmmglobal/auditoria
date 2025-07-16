@@ -1,0 +1,150 @@
+# Comandos para Verificación de Configuraciones de Dispositivos
+# Ejecutar estos comandos en PowerShell como Administrador
+
+# ========================================
+# 9.1 PERIFERICOS
+# ========================================
+
+# Verificar dispositivos Plug and Play
+Get-PnpDevice
+
+# Verificar dispositivos USB conectados
+Get-PnpDevice | Where-Object {$_.Class -eq "USB"}
+
+# Verificar dispositivos de almacenamiento
+Get-PnpDevice | Where-Object {$_.Class -eq "DiskDrive"}
+
+# Verificar impresoras instaladas
+Get-Printer
+
+# Verificar dispositivos de audio
+Get-PnpDevice | Where-Object {$_.Class -eq "Media"}
+
+# Verificar dispositivos de red
+Get-PnpDevice | Where-Object {$_.Class -eq "Net"}
+
+# Verificar dispositivos de imagen
+Get-PnpDevice | Where-Object {$_.Class -eq "Image"}
+
+# Verificar dispositivos de entrada (teclado, mouse)
+Get-PnpDevice | Where-Object {$_.Class -eq "Keyboard" -or $_.Class -eq "Mouse"}
+
+# Verificar dispositivos de almacenamiento USB
+Get-WmiObject -Class Win32_DiskDrive | Where-Object {$_.InterfaceType -eq "USB"}
+
+# Verificar dispositivos de almacenamiento removible
+Get-WmiObject -Class Win32_LogicalDisk | Where-Object {$_.DriveType -eq 2}
+
+# ========================================
+# 9.2 CONFIGURACIONES DE ENERGIA (Google Workspace)
+# ========================================
+
+# Listar esquemas de energía disponibles
+powercfg /list
+
+# Verificar esquema de energía activo
+powercfg /getactivescheme
+
+# Verificar configuración de energía actual
+powercfg /query
+
+# Verificar configuración de suspensión
+powercfg /query SCHEME_CURRENT SUB_SLEEP
+
+# Verificar configuración de pantalla
+powercfg /query SCHEME_CURRENT SUB_VIDEO
+
+# Verificar configuración de disco duro
+powercfg /query SCHEME_CURRENT SUB_DISK
+
+# Verificar configuración de sistema
+powercfg /query SCHEME_CURRENT SUB_SYSTEM
+
+# Verificar configuración de batería (si aplica)
+powercfg /query SCHEME_CURRENT SUB_BATTERY
+
+# Verificar configuración de botones y tapa
+powercfg /query SCHEME_CURRENT SUB_BUTTONS
+
+# Verificar configuración de PCI Express
+powercfg /query SCHEME_CURRENT SUB_PCIEXPRESS
+
+# ========================================
+# VERIFICACION DE CONFIGURACIONES DE SEGURIDAD
+# ========================================
+
+# Verificar políticas de grupo de dispositivos
+gpresult /r | findstr /i "device"
+
+# Verificar configuración de BitLocker (si aplica)
+manage-bde -status
+
+# Verificar configuración de Windows Hello
+Get-WmiObject -Class Win32_TPM
+
+# Verificar configuración de Smart Card
+Get-WmiObject -Class Win32_SmartCard
+
+# Verificar configuración de dispositivos biométricos
+Get-WmiObject -Class Win32_Biometric
+
+# ========================================
+# VERIFICACION DE DISPOSITIVOS DE ALMACENAMIENTO
+# ========================================
+
+# Verificar discos duros
+Get-PhysicalDisk
+
+# Verificar volúmenes
+Get-Volume
+
+# Verificar particiones
+Get-Partition
+
+# Verificar estado de SMART
+Get-WmiObject -Class MSStorageDriver_FailurePredictStatus
+
+# Verificar dispositivos de almacenamiento externo
+Get-WmiObject -Class Win32_LogicalDisk | Where-Object {$_.DriveType -eq 2}
+
+# ========================================
+# VERIFICACION DE IMPRESORAS
+# ========================================
+
+# Listar impresoras instaladas
+Get-Printer
+
+# Verificar cola de impresión
+Get-PrintJob
+
+# Verificar puertos de impresora
+Get-PrinterPort
+
+# Verificar drivers de impresora
+Get-PrinterDriver
+
+# ========================================
+# COMANDOS DE VERIFICACION RAPIDA
+# ========================================
+
+# Estado general de dispositivos
+echo "=== ESTADO DE DISPOSITIVOS ==="
+Get-PnpDevice | Where-Object {$_.Status -eq "Error"} | Format-Table FriendlyName,Status,Class -AutoSize
+
+# Esquema de energía activo
+echo "=== ESQUEMA DE ENERGIA ACTIVO ==="
+powercfg /getactivescheme
+
+# Dispositivos USB conectados
+echo "=== DISPOSITIVOS USB ==="
+Get-PnpDevice | Where-Object {$_.Class -eq "USB"} | Format-Table FriendlyName,Status -AutoSize
+
+# Impresoras instaladas
+echo "=== IMPRESORAS ==="
+Get-Printer | Format-Table Name,DriverName,PortName -AutoSize
+
+# Dispositivos de almacenamiento
+echo "=== ALMACENAMIENTO ==="
+Get-PhysicalDisk | Format-Table FriendlyName,Size,MediaType -AutoSize
+
+echo "=== VERIFICACION COMPLETADA ===" 

@@ -60,11 +60,11 @@ O Logrado
 **Script automático:** `Get-ServiceEvidence`
 
 ### 1.4 Configuración de Red
-- [ ] Firewall de Windows habilitado
-- [ ] NetBIOS sobre TCP/IP deshabilitado
-- [ ] DNS seguro configurado
-- [ ] IPv6 habilitado (si aplica)
-- [ ] Configuración de proxy aplicada
+- [E] Firewall de Windows habilitado
+- [O] NetBIOS sobre TCP/IP deshabilitado
+- [O] DNS seguro configurado
+- [O] IPv6 habilitado (si aplica)
+- [W] Configuración de proxy aplicada
 
 **En Google Workspace:** Dispositivos > Configuración de red
 **Evidencia:** Google Drive > Evidencias > Configuracion_Red
@@ -74,13 +74,13 @@ O Logrado
 ## 2. Configuraciones de Seguridad
 
 ### 2.1 Windows Defender
-- [ ] Protección en tiempo real habilitada
-- [ ] Protección basada en la nube habilitada
-- [ ] Envío automático de muestras habilitado
-- [ ] Protección contra ransomware habilitada
-- [ ] Control de acceso a carpetas habilitado
-- [ ] Definiciones de virus actualizadas
-- [ ] Escaneo automático configurado
+- [W] Protección en tiempo real habilitada
+- [W] Protección basada en la nube habilitada
+- [W] Envío automático de muestras habilitado
+- [W] Protección contra ransomware habilitada
+- [W] Control de acceso a carpetas habilitado
+- [W] Definiciones de virus actualizadas
+- [W] Escaneo automático configurado
 
 **En Google Workspace:** Seguridad > Endpoint Management > Windows Defender
 **Evidencia:** Google Drive > Evidencias > Windows_Defender
@@ -88,11 +88,11 @@ O Logrado
 **Script automático:** `Get-WindowsDefenderEvidence`
 
 ### 2.2 BitLocker
-- [ ] Cifrado de disco completo habilitado
-- [ ] TPM + PIN configurado
-- [ ] Recuperación de claves habilitada
-- [ ] Backup de claves configurado
-- [ ] Estado de cifrado verificado
+- [E] Cifrado de disco completo habilitado
+- [E] TPM + PIN configurado
+- [E] Recuperación de claves habilitada
+- [E] Backup de claves configurado
+- [E] Estado de cifrado verificado
 
 **En Google Workspace:** Dispositivos > Configuración de seguridad > BitLocker
 **Evidencia:** Google Drive > Evidencias > BitLocker
@@ -100,10 +100,10 @@ O Logrado
 **Script automático:** `Get-BitLockerEvidence`
 
 ### 2.3 Windows Hello
-- [ ] Autenticación biométrica habilitada
-- [ ] PIN complejo configurado
-- [ ] Windows Hello for Business habilitado
-- [ ] Configuración de seguridad verificada
+- [W] Autenticación biométrica habilitada
+- [W] PIN complejo configurado
+- [W] Windows Hello for Business habilitado
+- [W] Configuración de seguridad verificada
 
 **En Google Workspace:** Seguridad > Autenticación > Windows Hello
 **Evidencia:** Google Drive > Evidencias > Windows_Hello
@@ -149,7 +149,7 @@ O Logrado
 
 ## 4. Configuraciones de Aplicaciones
 
-### 4.1 Office 365
+### 4.1 Office 365 No Aplica
 - [ ] Protección contra macros habilitada
 - [ ] Políticas de DLP configuradas
 - [ ] Cifrado de documentos habilitado
@@ -174,30 +174,30 @@ O Logrado
 
 ## 5. Configuraciones de Auditoría
 
-### 5.1 Eventos de Windows
-- [ ] Inicios de sesión auditados (éxito/fallo)
-- [ ] Cambios de contraseña auditados
-- [ ] Creación/modificación de usuarios auditada
-- [ ] Acceso a archivos sensibles auditado
-- [ ] Cambios de configuración de seguridad auditados
+### 5.1 Eventos de Windows (W - Google Workspace)
+- [W] Inicios de sesión auditados (éxito/fallo)
+- [W] Cambios de contraseña auditados
+- [W] Creación/modificación de usuarios auditada
+- [W] Acceso a archivos sensibles auditado
+- [W] Cambios de configuración de seguridad auditados
 
 **En Google Workspace:** Seguridad > Centro de seguridad > Auditoría
 **Evidencia:** Google Drive > Evidencias > Auditoria_Eventos
 **Comando de verificación:** `auditpol /get /category:*`
-**Script automático:** `Get-AuditEvidence`
+**Script automático:** `08-Verificacion-Auditoria.bat`
 
-### 5.2 Configuración de Logs
-- [ ] Tamaño máximo de logs configurado (1GB)
-- [ ] Retención configurada (90 días)
-- [ ] Envío a SIEM configurado
-- [ ] Logs de seguridad verificados
+### 5.2 Configuración de Logs (W - Google Workspace)
+- [W] Tamaño máximo de logs configurado (1GB)
+- [W] Retención configurada (90 días)
+- [W] Envío a SIEM configurado
+- [W] Logs de seguridad verificados
 
 **En Google Workspace:** Seguridad > Configuración de logs
 **Evidencia:** Google Drive > Evidencias > Configuracion_Logs
 **Comando de verificación:** `wevtutil qe Security /c:10 /f:text`
-**Script automático:** `Get-LogEvidence`
+**Script automático:** `08-Verificacion-Auditoria.bat`
 
-## 6. Configuraciones de Backup
+## 6. Configuraciones de Backup (No aplica)
 
 ### 6.1 Windows Backup
 - [ ] Backup automático configurado
@@ -210,7 +210,7 @@ O Logrado
 **Comando de verificación:** `wbadmin get status`
 **Script automático:** `Get-BackupEvidence`
 
-### 6.2 OneDrive for Business
+### 6.2 OneDrive for Business (no aplica)
 - [ ] Sincronización automática configurada
 - [ ] Datos cifrados
 - [ ] Retención configurada
@@ -223,7 +223,7 @@ O Logrado
 
 ## 7. Configuraciones de Mantenimiento
 
-### 7.1 Windows Update
+### 7.1 Windows Update (workspace)
 - [ ] Actualizaciones automáticas habilitadas
 - [ ] Horario de instalación configurado (03:00 AM)
 - [ ] Reinicio automático habilitado
@@ -235,7 +235,7 @@ O Logrado
 **Comando de verificación:** `Get-HotFix | Sort-Object -Property InstalledOn -Descending | Select-Object -First 10`
 **Script automático:** `Get-WindowsUpdateEvidence`
 
-### 7.2 Mantenimiento del Sistema
+### 7.2 Mantenimiento del Sistema (no aplica)
 - [ ] Desfragmentación automática configurada
 - [ ] Limpieza de archivos temporales configurada
 - [ ] Integridad del sistema verificada
@@ -248,7 +248,7 @@ O Logrado
 
 ## 8. Configuraciones de Red Corporativa
 
-### 8.1 Dominio
+### 8.1 Dominio (workspace)
 - [ ] Sistema unido al dominio corporativo
 - [ ] Políticas de grupo aplicadas
 - [ ] Reloj sincronizado con servidor NTP
@@ -259,7 +259,7 @@ O Logrado
 **Comando de verificación:** `systeminfo | findstr /C:"Domain"`
 **Script automático:** `Get-DomainEvidence`
 
-### 8.2 VPN
+### 8.2 VPN (no aplica)
 - [ ] Cliente VPN corporativo configurado
 - [ ] Conexión automática habilitada
 - [ ] Políticas de tráfico configuradas
@@ -272,27 +272,27 @@ O Logrado
 
 ## 9. Configuraciones de Dispositivos
 
-### 9.1 Periféricos
-- [ ] Acceso a USB controlado
-- [ ] Impresoras seguras configuradas
-- [ ] Cifrado de dispositivos móviles habilitado
-- [ ] Configuración de dispositivos verificada
+### 9.1 Periféricos (O - Local + W - Google Workspace)
+- [O] Acceso a USB controlado
+- [W] Impresoras seguras configuradas
+- [W] Cifrado de dispositivos móviles habilitado
+- [O] Configuración de dispositivos verificada
 
 **En Google Workspace:** Dispositivos > Configuración de periféricos
 **Evidencia:** Google Drive > Evidencias > Configuracion_Perifericos
 **Comando de verificación:** `Get-PnpDevice`
-**Script automático:** `Get-PeripheralEvidence`
+**Script automático:** `09-Verificacion-Dispositivos.bat`
 
-### 9.2 Configuraciones de Energía
-- [ ] Suspensión automática configurada
-- [ ] Bloqueo de pantalla habilitado
-- [ ] Timeouts configurados
-- [ ] Configuración de energía verificada
+### 9.2 Configuraciones de Energía (W - Google Workspace)
+- [W] Suspensión automática configurada
+- [W] Bloqueo de pantalla habilitado
+- [W] Timeouts configurados
+- [W] Configuración de energía verificada
 
 **En Google Workspace:** Dispositivos > Configuración de energía
 **Evidencia:** Google Drive > Evidencias > Configuracion_Energia
 **Comando de verificación:** `powercfg /list`
-**Script automático:** `Get-PowerEvidence`
+**Script automático:** `09-Verificacion-Dispositivos.bat`
 
 ## 10. Verificación Final
 

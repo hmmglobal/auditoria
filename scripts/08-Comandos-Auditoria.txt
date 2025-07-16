@@ -1,0 +1,89 @@
+# Comandos para Verificación de Configuraciones de Auditoría
+# Ejecutar estos comandos en PowerShell como Administrador
+
+# ========================================
+# 5.1 EVENTOS DE WINDOWS (No aplica - Google Workspace)
+# ========================================
+
+# Verificar políticas de auditoría actuales
+auditpol /get /category:*
+
+# Verificar auditoría de inicios de sesión
+auditpol /get /subcategory:"Logon"
+
+# Verificar auditoría de cambios de contraseña
+auditpol /get /subcategory:"Credential Validation"
+
+# Verificar auditoría de creación de usuarios
+auditpol /get /subcategory:"User Account Management"
+
+# Verificar auditoría de acceso a archivos
+auditpol /get /subcategory:"File System"
+
+# Verificar auditoría de cambios de configuración
+auditpol /get /subcategory:"Security State Change"
+
+# ========================================
+# 5.2 CONFIGURACIÓN DE LOGS (No aplica - Google Workspace)
+# ========================================
+
+# Verificar configuración del log de seguridad
+wevtutil qe Security /c:10 /f:text
+
+# Verificar tamaño máximo del log de seguridad
+wevtutil gl Security
+
+# Verificar configuración del log de aplicación
+wevtutil gl Application
+
+# Verificar configuración del log del sistema
+wevtutil gl System
+
+# Listar todos los logs disponibles
+wevtutil el
+
+# Verificar eventos recientes de seguridad
+Get-WinEvent -LogName Security -MaxEvents 10
+
+# Verificar eventos de inicio de sesión exitosos
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624} -MaxEvents 5
+
+# Verificar eventos de inicio de sesión fallidos
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4625} -MaxEvents 5
+
+# Verificar eventos de cambios de contraseña
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4723} -MaxEvents 5
+
+# Verificar eventos de creación de usuarios
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4720} -MaxEvents 5
+
+# ========================================
+# VERIFICACIÓN DE CONFIGURACIÓN DE AUDITORÍA
+# ========================================
+
+# Verificar si la auditoría está habilitada
+Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "AuditBaseObjects"
+
+# Verificar configuración de auditoría de objetos
+Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "SCENoApplyLegacyAuditPolicy"
+
+# Verificar configuración de auditoría de acceso a archivos
+Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "AuditObjectAccess"
+
+# ========================================
+# COMANDOS DE VERIFICACIÓN RÁPIDA
+# ========================================
+
+# Estado general de auditoría
+echo "=== ESTADO DE AUDITORÍA ==="
+auditpol /get /category:* | findstr /i "success failure"
+
+# Últimos eventos de seguridad
+echo "=== ÚLTIMOS EVENTOS DE SEGURIDAD ==="
+Get-WinEvent -LogName Security -MaxEvents 5 | Format-Table TimeCreated,Id,Message -AutoSize
+
+# Configuración de logs
+echo "=== CONFIGURACIÓN DE LOGS ==="
+wevtutil gl Security | findstr /i "maxsize retention"
+
+echo "=== VERIFICACIÓN COMPLETADA ===" 
