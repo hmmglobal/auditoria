@@ -1,0 +1,47 @@
+=== COMANDOS PARA CONFIGURACION DE RED ===
+
+1. DESHABILITAR NETBIOS SOBRE TCP/IP:
+netsh interface ipv4 set interface "Ethernet" netbios=disable
+netsh interface ipv4 set interface "Wi-Fi" netbios=disable
+
+2. CONFIGURAR DNS SEGURO (Google DNS):
+netsh interface ipv4 set dns "Ethernet" static 8.8.8.8
+netsh interface ipv4 add dns "Ethernet" 8.8.4.4 index=2
+netsh interface ipv4 set dns "Wi-Fi" static 8.8.8.8
+netsh interface ipv4 add dns "Wi-Fi" 8.8.4.4 index=2
+
+3. VERIFICAR IPv6:
+netsh interface ipv6 show interface
+
+4. HABILITAR IPv6 (si es necesario):
+netsh interface ipv6 set interface "Ethernet" enabled
+netsh interface ipv6 set interface "Wi-Fi" enabled
+
+5. VERIFICAR CONFIGURACION DE PROXY:
+netsh winhttp show proxy
+
+6. CONFIGURAR PROXY (si es necesario):
+netsh winhttp set proxy proxy-server:puerto
+
+7. VERIFICAR CONFIGURACION DE RED:
+ipconfig /all
+
+8. VERIFICAR CONECTIVIDAD:
+ping 8.8.8.8
+nslookup google.com
+
+=== CONFIGURACIONES QUE SE MANEJAN EN GOOGLE WORKSPACE ===
+
+9. PROXY CORPORATIVO:
+   - Google Workspace > Dispositivos > Configuración de red > Proxy
+   - Configurar servidor proxy, puertos, excepciones
+
+10. FIREWALL DE WINDOWS (Reglas avanzadas):
+    - Google Workspace > Dispositivos > Configuración de red > Firewall
+    - Configurar reglas específicas, puertos, aplicaciones
+
+=== INSTRUCCIONES ===
+1. Ejecutar como administrador
+2. Reemplazar "Ethernet" y "Wi-Fi" con los nombres reales de las interfaces
+3. Para proxy, usar la configuración de la organización
+4. Para configuraciones avanzadas, usar Google Workspace 

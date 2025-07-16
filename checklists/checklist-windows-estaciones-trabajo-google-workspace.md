@@ -9,28 +9,23 @@
 - **Versión de Windows:** _________________
 - **Google Workspace Admin:** _________________
 
-## Preparación Inicial
+## Lectura ##
 
-### 0.1 Configuración de Google Workspace
-- [ ] Acceso a Google Workspace Admin Console configurado
-- [ ] Permisos de administrador verificados
-- [ ] Estructura de carpetas en Google Drive creada
-- [ ] Script de recolección de evidencia descargado
-- [ ] Herramientas de auditoría preparadas
-
-**Evidencia:** Captura de pantalla de Google Workspace Admin Console
-**Comando de verificación:** `Test-NetConnection admin.google.com -Port 443`
+W Logrado en workspace
+E manejado por eset
+X No logrado
+O Logrado
 
 ## 1. Configuración de Sistema Operativo
 
-### 1.1 Políticas de Contraseñas
-- [ ] Longitud mínima configurada a 12 caracteres
-- [ ] Complejidad de contraseñas habilitada
-- [ ] Historial de contraseñas configurado (24)
-- [ ] Edad máxima de contraseña configurada (90 días)
-- [ ] Edad mínima de contraseña configurada (1 día)
-- [ ] Bloqueo de cuenta configurado (5 intentos)
-- [ ] Tiempo de bloqueo configurado (30 minutos)
+### 1.1 Políticas de Contraseñas (Aplicado via Workspace)
+- [W] Longitud mínima configurada a 12 caracteres
+- [W] Complejidad de contraseñas habilitada
+- [W] Historial de contraseñas configurado (24)
+- [W] Edad máxima de contraseña configurada (90 días)
+- [W] Edad mínima de contraseña configurada (1 día)
+- [W] Bloqueo de cuenta configurado (5 intentos)
+- [W] Tiempo de bloqueo configurado (30 minutos)
 
 **En Google Workspace:** Seguridad > Configuración de seguridad > Políticas de contraseñas
 **Evidencia:** Google Drive > Evidencias > Políticas_Contraseñas
@@ -38,11 +33,11 @@
 **Script automático:** `Get-PasswordPolicyEvidence`
 
 ### 1.2 Configuración de Usuarios
-- [ ] Cuenta de invitado deshabilitada
-- [ ] Cuenta de administrador renombrada
-- [ ] Timeout de sesión configurado
-- [ ] Auditoría de eventos habilitada
-- [ ] Usuarios inactivos deshabilitados
+- [O] Cuenta de invitado deshabilitada
+- [O] Cuenta de administrador renombrada
+- [W] Timeout de sesión configurado
+- [O] Auditoría de eventos habilitada
+- [W] Usuarios inactivos deshabilitados
 
 **En Google Workspace:** Usuarios > Configuración de usuarios
 **Evidencia:** Google Drive > Evidencias > Configuracion_Usuarios
@@ -50,14 +45,14 @@
 **Script automático:** `Get-UserEvidence`
 
 ### 1.3 Configuración de Servicios
-- [ ] Telnet deshabilitado
-- [ ] TFTP deshabilitado
-- [ ] SNMP deshabilitado (si no es necesario)
-- [ ] Alerter deshabilitado
-- [ ] Messenger deshabilitado
-- [ ] Windows Update configurado como automático
-- [ ] Windows Defender habilitado
-- [ ] Firewall de Windows habilitado
+- [O] Telnet deshabilitado
+- [O] TFTP deshabilitado
+- [O] SNMP deshabilitado (si no es necesario)
+- [O] Alerter deshabilitado
+- [O] Messenger deshabilitado
+- [W] Windows Update configurado como automático
+- [E] Windows Defender habilitado
+- [E] Firewall de Windows habilitado
 
 **En Google Workspace:** Dispositivos > Configuración de dispositivos > Servicios
 **Evidencia:** Google Drive > Evidencias > Servicios_Sistema
