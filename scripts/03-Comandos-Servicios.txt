@@ -1,0 +1,50 @@
+=== COMANDOS PARA CONFIGURACION DE SERVICIOS ===
+
+1. DESHABILITAR TELNET:
+sc config TlntSvr start= disabled
+sc stop TlntSvr
+
+2. DESHABILITAR TFTP:
+sc config tftpd start= disabled
+sc stop tftpd
+
+3. DESHABILITAR SNMP:
+sc config SNMP start= disabled
+sc stop SNMP
+
+4. DESHABILITAR ALERTER:
+sc config Alerter start= disabled
+sc stop Alerter
+
+5. DESHABILITAR MESSENGER:
+sc config Messenger start= disabled
+sc stop Messenger
+
+6. CONFIGURAR WINDOWS UPDATE COMO AUTOMATICO:
+sc config wuauserv start= auto
+
+7. VERIFICAR WINDOWS DEFENDER:
+sc query WinDefend
+
+8. VERIFICAR FIREWALL DE WINDOWS:
+sc query MpsSvc
+
+=== SERVICIOS QUE SE MANEJAN EN GOOGLE WORKSPACE ===
+
+9. WINDOWS UPDATE (Políticas avanzadas):
+   - Google Workspace > Dispositivos > Configuración de actualizaciones
+   - Configurar horarios, reinicios automáticos, etc.
+
+10. WINDOWS DEFENDER (Configuración avanzada):
+    - Google Workspace > Seguridad > Endpoint Management > Windows Defender
+    - Configurar protección en tiempo real, escaneos, etc.
+
+11. FIREWALL DE WINDOWS (Reglas avanzadas):
+    - Google Workspace > Dispositivos > Configuración de red > Firewall
+    - Configurar reglas específicas, puertos, etc.
+
+=== INSTRUCCIONES ===
+1. Ejecutar como administrador
+2. Los comandos sc configuran el tipo de inicio
+3. Los comandos sc stop detienen servicios en ejecución
+4. Para configuraciones avanzadas, usar Google Workspace 
