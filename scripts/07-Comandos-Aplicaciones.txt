@@ -1,0 +1,72 @@
+=== COMANDOS PARA VERIFICACION DE APLICACIONES DE TERCEROS ===
+
+4.2 APLICACIONES DE TERCEROS:
+-----------------------------
+
+# Verificar aplicaciones instaladas (WMI)
+powershell -Command "Get-WmiObject -Class Win32_Product | Select-Object Name,Version | Sort-Object Name"
+
+# Verificar aplicaciones del sistema (Registro)
+powershell -Command "Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName,DisplayVersion | Sort-Object DisplayName"
+
+# Verificar aplicaciones de usuario (Registro)
+powershell -Command "Get-ItemProperty HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName,DisplayVersion | Sort-Object DisplayName"
+
+# Verificar aplicaciones en ejecución
+tasklist /v
+
+# Verificar servicios instalados
+sc query type= service state= all
+
+# Verificar integridad del sistema
+sfc /scannow
+
+# Verificar archivos del sistema
+DISM /Online /Cleanup-Image /CheckHealth
+
+# Verificar aplicaciones de inicio
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+
+# Verificar aplicaciones de inicio de servicios
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices"
+
+# Verificar aplicaciones instaladas por MSI
+powershell -Command "Get-WmiObject -Class Win32_Product | Where-Object {$_.Vendor -ne 'Microsoft Corporation'} | Select-Object Name,Version,Vendor"
+
+# Verificar aplicaciones de Microsoft Store
+powershell -Command "Get-AppxPackage | Select-Object Name,Version,PackageFullName"
+
+=== CONFIGURACIONES EN GOOGLE WORKSPACE ===
+
+4.2 APLICACIONES DE TERCEROS:
+- Google Workspace > Dispositivos > Políticas de aplicaciones > Aplicaciones de terceros
+- Configurar lista de aplicaciones autorizadas
+- Configurar políticas de instalación/desinstalación
+- Configurar restricciones de aplicaciones
+
+=== VERIFICACIONES MANUALES ===
+
+# Revisar archivos generados:
+1. aplicaciones_instaladas.txt - Lista completa de aplicaciones
+2. aplicaciones_sistema.txt - Aplicaciones del sistema
+3. aplicaciones_usuario.txt - Aplicaciones de usuario
+
+# Verificar manualmente:
+1. Abrir "Agregar o quitar programas" (appwiz.cpl)
+2. Revisar aplicaciones instaladas
+3. Verificar versiones y actualizaciones
+4. Identificar aplicaciones no autorizadas
+
+# Verificar integridad:
+1. Revisar resultados de sfc /scannow
+2. Verificar logs de eventos para errores
+3. Comprobar que no hay aplicaciones maliciosas
+
+=== INSTRUCCIONES ===
+1. Ejecutar como administrador
+2. Los comandos PowerShell requieren permisos elevados
+3. Revisar los archivos generados para análisis
+4. Comparar con lista de aplicaciones autorizadas
+5. Documentar aplicaciones no autorizadas
+6. Para configuraciones avanzadas, usar Google Workspace 
