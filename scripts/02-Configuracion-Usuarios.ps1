@@ -1,9 +1,5 @@
-# Script para Configuración de Usuarios - Elementos no manejables en Google Workspace
-# Configura: Cuenta de invitado, Cuenta de administrador, Auditoría de eventos
-
-param(
-    [switch]$Apply
-)
+# Script para Configuración de Usuarios
+param([switch]$Apply)
 
 # Verificar privilegios de administrador
 $currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
