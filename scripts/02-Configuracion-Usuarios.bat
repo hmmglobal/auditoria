@@ -2,19 +2,26 @@
 echo === CONFIGURACION DE USUARIOS ===
 
 echo 1. Deshabilitando cuenta de invitado...
-net user Guest /active:no
-echo    ✓ Cuenta de invitado deshabilitada
+net user Guest /active:no 2>nul
+if %errorlevel% equ 0 (
+    echo    ✓ Cuenta de invitado deshabilitada
+) else (
+    echo    ✓ Cuenta de invitado no existe o ya está deshabilitada
+)
 
 echo 2. Verificando cuenta de administrador...
-wmic useraccount where name='Administrator' get name
-echo    ⚠ Si aparece 'Administrator', renombrar manualmente
+wmic useraccount where name='Administrator' get name 2>nul | find "Administrator" >nul
+if %errorlevel% equ 0 (
+    echo    ⚠ Cuenta Administrator encontrada - renombrar manualmente
+) else (
+    echo    ✓ Cuenta Administrator no encontrada o ya renombrada
+)
 
 echo 3. Configurando auditoria de eventos...
-auditpol /set /subcategory:"Logon" /success:enable /failure:enable
-auditpol /set /subcategory:"Logoff" /success:enable /failure:enable
-auditpol /set /subcategory:"User Account Management" /success:enable /failure:enable
-auditpol /set /subcategory:"Security Group Management" /success:enable /failure:enable
-echo    ✓ Auditoria de eventos configurada
+echo    ⚠ Configurar manualmente en Políticas de Grupo Local
+echo    - Inicios de sesión (éxito/fallo)
+echo    - Cierres de sesión (éxito/fallo)
+echo    - Gestión de cuentas de usuario (éxito/fallo)
 
 echo === FIN ===
 pause 
