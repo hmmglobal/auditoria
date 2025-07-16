@@ -1,0 +1,96 @@
+=== CONFIGURACION DE USUARIOS ===
+1. Deshabilitando cuenta de invitado...
+No se ha encontrado el nombre de usuario.
+
+Puede obtener más ayuda con el comando NET HELPMSG 2221.
+
+   Ô£ô Cuenta de invitado deshabilitada
+2. Verificando cuenta de administrador...
+No hay instancias disponibles.
+
+
+   ÔÜá Si aparece 'Administrator', renombrar manualmente
+3. Configurando auditoria de eventos...
+Se produjo un error de tipo 0x00000057:
+El parámetro no es correcto.
+
+Uso: AuditPol comando [<subcomando><opciones>]
+
+
+Comandos (solo se permite un comando por ejecución)
+  /?               Ayuda (contextual)
+  /get             Muestra la directiva de auditoría actual.
+  /set             Establece la directiva de auditoría.
+  /list            Muestra los elementos de directiva seleccionables.
+  /backup          Guarda la directiva de auditoría en un archivo.
+  /restore         Restaura la directiva de auditoría desde un archivo.
+  /clear           Borra la directiva de auditoría.
+  /remove          Quita la directiva de auditoría por usuario de una cuenta
+                   de usuario.
+  /resourceSACL    Configura las SACL de recursos globales.
+
+
+Use AuditPol <comando> /? para obtener los detalles de cada comando
+Se produjo un error de tipo 0x00000057:
+El parámetro no es correcto.
+
+Uso: AuditPol comando [<subcomando><opciones>]
+
+
+Comandos (solo se permite un comando por ejecución)
+  /?               Ayuda (contextual)
+  /get             Muestra la directiva de auditoría actual.
+  /set             Establece la directiva de auditoría.
+  /list            Muestra los elementos de directiva seleccionables.
+  /backup          Guarda la directiva de auditoría en un archivo.
+  /restore         Restaura la directiva de auditoría desde un archivo.
+  /clear           Borra la directiva de auditoría.
+  /remove          Quita la directiva de auditoría por usuario de una cuenta
+                   de usuario.
+  /resourceSACL    Configura las SACL de recursos globales.
+
+
+Use AuditPol <comando> /? para obtener los detalles de cada comando
+Se produjo un error de tipo 0x00000057:
+El parámetro no es correcto.
+
+Uso: AuditPol comando [<subcomando><opciones>]
+
+
+Comandos (solo se permite un comando por ejecución)
+  /?               Ayuda (contextual)
+  /get             Muestra la directiva de auditoría actual.
+  /set             Establece la directiva de auditoría.
+  /list            Muestra los elementos de directiva seleccionables.
+  /backup          Guarda la directiva de auditoría en un archivo.
+  /restore         Restaura la directiva de auditoría desde un archivo.
+  /clear           Borra la directiva de auditoría.
+  /remove          Quita la directiva de auditoría por usuario de una cuenta
+                   de usuario.
+  /resourceSACL    Configura las SACL de recursos globales.
+
+
+Use AuditPol <comando> /? para obtener los detalles de cada comando
+Se produjo un error de tipo 0x00000057:
+El parámetro no es correcto.
+
+Uso: AuditPol comando [<subcomando><opciones>]
+
+
+Comandos (solo se permite un comando por ejecución)
+  /?               Ayuda (contextual)
+  /get             Muestra la directiva de auditoría actual.
+  /set             Establece la directiva de auditoría.
+  /list            Muestra los elementos de directiva seleccionables.
+  /backup          Guarda la directiva de auditoría en un archivo.
+  /restore         Restaura la directiva de auditoría desde un archivo.
+  /clear           Borra la directiva de auditoría.
+  /remove          Quita la directiva de auditoría por usuario de una cuenta
+                   de usuario.
+  /resourceSACL    Configura las SACL de recursos globales.
+
+
+Use AuditPol <comando> /? para obtener los detalles de cada comando
+   Ô£ô Auditoria de eventos configurada
+=== FIN ===
+Presione una tecla para continuar . . .
