@@ -1,0 +1,72 @@
+=== COMANDOS PARA VERIFICACION DE NAVEGACION WEB ===
+
+3.1 MICROSOFT EDGE:
+-------------------
+
+# Verificar SmartScreen
+reg query "HKCU\Software\Microsoft\Edge\SmartScreenEnabled"
+
+# Verificar protección contra phishing
+reg query "HKCU\Software\Microsoft\Edge\PhishingProtectionEnabled"
+
+# Verificar configuración de cookies
+reg query "HKCU\Software\Microsoft\Edge\CookiesBlockThirdParty"
+
+# Verificar JavaScript
+reg query "HKCU\Software\Microsoft\Edge\JavaScriptEnabled"
+
+# Verificar plugins
+reg query "HKCU\Software\Microsoft\Edge\Extensions"
+
+# Verificar configuración general de seguridad
+reg query "HKCU\Software\Microsoft\Edge\Security" /s
+
+3.2 CONFIGURACIONES DE PROXY:
+-----------------------------
+
+# Verificar configuración de proxy
+netsh winhttp show proxy
+
+# Verificar proxy en Edge
+reg query "HKCU\Software\Microsoft\Edge\ProxyServer"
+
+# Verificar filtrado de contenido
+reg query "HKCU\Software\Microsoft\Edge\ContentFiltering"
+
+# Verificar certificados SSL
+certmgr.msc
+
+# Verificar certificados del sistema
+certmgr.msc /s
+
+# Verificar configuración de red
+ipconfig /all
+
+=== CONFIGURACIONES EN GOOGLE WORKSPACE ===
+
+3.1 MICROSOFT EDGE:
+- Google Workspace > Dispositivos > Configuración de navegador > Microsoft Edge
+- Configurar SmartScreen, protección contra phishing, cookies, JavaScript, plugins
+
+3.2 CONFIGURACIONES DE PROXY:
+- Google Workspace > Dispositivos > Configuración de red > Proxy (ya configurado en punto 1.4)
+- Configurar filtrado de contenido, certificados SSL
+
+=== VERIFICACIONES MANUALES ===
+
+# Abrir Microsoft Edge y verificar:
+1. Configuración > Privacidad, búsqueda y servicios
+2. Configuración > Cookies y permisos del sitio
+3. Configuración > Descargas
+4. Configuración > Extensiones
+
+# Verificar certificados:
+1. Abrir certmgr.msc
+2. Revisar certificados personales
+3. Revisar certificados de autoridades de certificación raíz de confianza
+
+=== INSTRUCCIONES ===
+1. Ejecutar como administrador para algunas verificaciones
+2. Los comandos reg query verifican configuraciones del registro
+3. Para configuraciones avanzadas, usar Google Workspace
+4. Documentar resultados en Google Drive 

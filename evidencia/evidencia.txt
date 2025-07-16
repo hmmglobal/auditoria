@@ -1,0 +1,1 @@
+Windows defender y Bitlocker manejado enteramente por workspace y eset. (No aplicaciones)
