@@ -1,96 +1,40 @@
-=== CONFIGURACION DE USUARIOS ===
-1. Deshabilitando cuenta de invitado...
-No se ha encontrado el nombre de usuario.
+=== VERIFICACION DE NAVEGACION WEB ===
+3.1 MICROSOFT EDGE:
+-------------------
+Verificando configuraciones de Edge...
+"#" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
 
-Puede obtener más ayuda con el comando NET HELPMSG 2221.
+HKEY_CURRENT_USER\Software\Microsoft\Edge\SmartScreenEnabled
+    (Predeterminado)    REG_DWORD    0x1
 
-   Ô£ô Cuenta de invitado deshabilitada
-2. Verificando cuenta de administrador...
-No hay instancias disponibles.
+   Ô£ô SmartScreen configurado
+"#" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+   ÔÜá Protecci├│n contra phishing no configurada
+"#" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+   ÔÜá Configuraci├│n de cookies no configurada
+"#" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+   ÔÜá JavaScript no configurado
 
+3.2 CONFIGURACIONES DE PROXY:
+-----------------------------
+Verificando configuraci├│n de proxy...
+"#" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+La siguiente DLL de ayuda no se puede cargar: RASMONTR.DLL.
 
-   ÔÜá Si aparece 'Administrator', renombrar manualmente
-3. Configurando auditoria de eventos...
-Se produjo un error de tipo 0x00000057:
-El parámetro no es correcto.
+Configuración actual del proxy WinHTTP:
 
-Uso: AuditPol comando [<subcomando><opciones>]
+    Acceso directo (sin servidor proxy).
 
+   Ô£ô Configuraci├│n de proxy verificada
+"#" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+   ÔÜá Verificar certificados SSL manualmente
 
-Comandos (solo se permite un comando por ejecución)
-  /?               Ayuda (contextual)
-  /get             Muestra la directiva de auditoría actual.
-  /set             Establece la directiva de auditoría.
-  /list            Muestra los elementos de directiva seleccionables.
-  /backup          Guarda la directiva de auditoría en un archivo.
-  /restore         Restaura la directiva de auditoría desde un archivo.
-  /clear           Borra la directiva de auditoría.
-  /remove          Quita la directiva de auditoría por usuario de una cuenta
-                   de usuario.
-  /resourceSACL    Configura las SACL de recursos globales.
-
-
-Use AuditPol <comando> /? para obtener los detalles de cada comando
-Se produjo un error de tipo 0x00000057:
-El parámetro no es correcto.
-
-Uso: AuditPol comando [<subcomando><opciones>]
-
-
-Comandos (solo se permite un comando por ejecución)
-  /?               Ayuda (contextual)
-  /get             Muestra la directiva de auditoría actual.
-  /set             Establece la directiva de auditoría.
-  /list            Muestra los elementos de directiva seleccionables.
-  /backup          Guarda la directiva de auditoría en un archivo.
-  /restore         Restaura la directiva de auditoría desde un archivo.
-  /clear           Borra la directiva de auditoría.
-  /remove          Quita la directiva de auditoría por usuario de una cuenta
-                   de usuario.
-  /resourceSACL    Configura las SACL de recursos globales.
-
-
-Use AuditPol <comando> /? para obtener los detalles de cada comando
-Se produjo un error de tipo 0x00000057:
-El parámetro no es correcto.
-
-Uso: AuditPol comando [<subcomando><opciones>]
-
-
-Comandos (solo se permite un comando por ejecución)
-  /?               Ayuda (contextual)
-  /get             Muestra la directiva de auditoría actual.
-  /set             Establece la directiva de auditoría.
-  /list            Muestra los elementos de directiva seleccionables.
-  /backup          Guarda la directiva de auditoría en un archivo.
-  /restore         Restaura la directiva de auditoría desde un archivo.
-  /clear           Borra la directiva de auditoría.
-  /remove          Quita la directiva de auditoría por usuario de una cuenta
-                   de usuario.
-  /resourceSACL    Configura las SACL de recursos globales.
-
-
-Use AuditPol <comando> /? para obtener los detalles de cada comando
-Se produjo un error de tipo 0x00000057:
-El parámetro no es correcto.
-
-Uso: AuditPol comando [<subcomando><opciones>]
-
-
-Comandos (solo se permite un comando por ejecución)
-  /?               Ayuda (contextual)
-  /get             Muestra la directiva de auditoría actual.
-  /set             Establece la directiva de auditoría.
-  /list            Muestra los elementos de directiva seleccionables.
-  /backup          Guarda la directiva de auditoría en un archivo.
-  /restore         Restaura la directiva de auditoría desde un archivo.
-  /clear           Borra la directiva de auditoría.
-  /remove          Quita la directiva de auditoría por usuario de una cuenta
-                   de usuario.
-  /resourceSACL    Configura las SACL de recursos globales.
-
-
-Use AuditPol <comando> /? para obtener los detalles de cada comando
-   Ô£ô Auditoria de eventos configurada
+=== CONFIGURACIONES EN GOOGLE WORKSPACE ===
 === FIN ===
 Presione una tecla para continuar . . .
