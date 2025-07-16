@@ -9,13 +9,13 @@ wmic useraccount where name='Administrator' get name
 3. RENOMBRAR CUENTA DE ADMINISTRADOR (ejecutar manualmente):
 wmic useraccount where name='Administrator' call rename name='Admin_NUEVO'
 
-4. CONFIGURAR AUDITORIA DE EVENTOS:
+4. CONFIGURAR AUDITORIA DE EVENTOS (ejecutar uno por uno):
 auditpol /set /subcategory:"Logon" /success:enable /failure:enable
 auditpol /set /subcategory:"Logoff" /success:enable /failure:enable
 auditpol /set /subcategory:"User Account Management" /success:enable /failure:enable
 auditpol /set /subcategory:"Security Group Management" /success:enable /failure:enable
 
-5. VERIFICAR CONFIGURACION:
+5. VERIFICAR CONFIGURACION (ejecutar uno por uno):
 auditpol /get /subcategory:"Logon"
 auditpol /get /subcategory:"Logoff"
 auditpol /get /subcategory:"User Account Management"
@@ -23,4 +23,5 @@ auditpol /get /subcategory:"User Account Management"
 === INSTRUCCIONES ===
 1. Ejecutar como administrador
 2. Para el punto 3, cambiar 'Admin_NUEVO' por el nombre deseado
-3. Ejecutar comandos uno por uno 
+3. Ejecutar comandos uno por uno
+4. Los comandos auditpol deben ejecutarse individualmente 
