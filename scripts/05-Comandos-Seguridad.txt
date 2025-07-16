@@ -1,0 +1,78 @@
+=== COMANDOS PARA VERIFICACION DE SEGURIDAD ===
+
+2.1 WINDOWS DEFENDER:
+---------------------
+# Verificar estado general
+powershell -Command "Get-MpComputerStatus"
+
+# Verificar protección en tiempo real
+powershell -Command "Get-MpComputerStatus | Select-Object RealTimeProtectionEnabled"
+
+# Verificar protección basada en la nube
+powershell -Command "Get-MpComputerStatus | Select-Object CloudProtectionEnabled"
+
+# Verificar definiciones de virus
+powershell -Command "Get-MpComputerStatus | Select-Object AntivirusSignatureVersion"
+
+# Verificar protección contra ransomware
+powershell -Command "Get-MpComputerStatus | Select-Object BehaviorMonitorEnabled"
+
+2.2 BITLOCKER:
+--------------
+# Verificar estado de BitLocker
+manage-bde -status
+
+# Verificar TPM
+powershell -Command "Get-WmiObject -Class Win32_TPM"
+
+# Verificar configuración de BitLocker
+powershell -Command "Get-BitLockerVolume"
+
+2.3 WINDOWS HELLO:
+------------------
+# Verificar TPM
+powershell -Command "Get-WmiObject -Class Win32_TPM"
+
+# Verificar Windows Hello
+powershell -Command "Get-WmiObject -Class Win32_ComputerSystem | Select-Object PCSystemType"
+
+# Verificar configuración de PIN
+reg query "HKLM\SOFTWARE\Policies\Microsoft\PassportForWork" /s
+
+2.4 POLITICAS DE APLICACIONES:
+------------------------------
+# Verificar AppLocker
+powershell -Command "Get-AppLockerPolicy -Effective"
+
+# Verificar SmartScreen
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled
+
+# Verificar UAC
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA
+
+# Verificar políticas de ejecución
+powershell -Command "Get-ExecutionPolicy -List"
+
+=== CONFIGURACIONES EN GOOGLE WORKSPACE ===
+
+2.1 WINDOWS DEFENDER:
+- Google Workspace > Seguridad > Endpoint Management > Windows Defender
+- Configurar protección en tiempo real, nube, ransomware, etc.
+
+2.2 BITLOCKER:
+- Google Workspace > Dispositivos > Configuración de seguridad > BitLocker
+- Configurar cifrado, TPM, recuperación de claves
+
+2.3 WINDOWS HELLO:
+- Google Workspace > Seguridad > Autenticación > Windows Hello
+- Configurar autenticación biométrica, PIN, etc.
+
+2.4 POLITICAS DE APLICACIONES:
+- Google Workspace > Dispositivos > Políticas de aplicaciones
+- Configurar AppLocker, SmartScreen, UAC, etc.
+
+=== INSTRUCCIONES ===
+1. Ejecutar como administrador
+2. Los comandos PowerShell requieren permisos elevados
+3. Para configuraciones avanzadas, usar Google Workspace
+4. Documentar resultados en Google Drive 
